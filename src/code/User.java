@@ -10,15 +10,6 @@ public abstract class User {
 	public String username;
 	private String password;
 
-	/**
-	 * @param id
-	 * @param firstName
-	 * @param lastName
-	 * @param email
-	 * @param phoneNumber
-	 * @param username
-	 * @param password
-	 */
 	public User(int id, String firstName, String lastName, String email, int phoneNumber, String username, String password) {
 		super();
 		this.id = id;
