@@ -20,4 +20,14 @@ public class Product {
 		this.category = category;
 		this.averageRating = averageRating;
 	}
+	
+	public void edit(int id, String name, float price, int count, String description, String category, float averageRating) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.count = count;
+		this.description = description;
+		this.category = category;
+		this.averageRating = averageRating;
+	}
 }
