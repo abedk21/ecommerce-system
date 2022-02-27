@@ -34,4 +34,8 @@ public class Cart {
 	      }
 		this.totalPrice = totalPrice;
 	}
+	
+	public Checkout proceedToCheckout() {
+		return new Checkout(products, totalNumberOfProducts, totalPrice);
+	}
 }
