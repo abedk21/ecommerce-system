@@ -1,6 +1,8 @@
 package code;
 
-import java.util.ArrayList;
+import java.time.*;
+//import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class Checkout {
 	
@@ -13,9 +15,17 @@ public class Checkout {
 
 	public Checkout(ArrayList<Product> products, int totalNumberOfProducts, float totalPrice) {
 		super();
-		this.products = products;
+		this.products = new ArrayList<Product>(products);
 		this.totalNumberOfProducts = totalNumberOfProducts;
 		this.totalPrice = totalPrice;
 		this.finalPrice = totalPrice + totalPrice*taxRate + deliveryCharge;
 	}
+	
+	public Order makePayment() {
+		//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();  
+		Order order = new Order(now,products);
+		return order;
+	}
+	
 }

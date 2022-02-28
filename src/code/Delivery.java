@@ -1,20 +1,20 @@
 package code;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 
 public class Delivery {
 	
-	public int trackingNumber;
-	public Date dateOfArrival;
+	public static int trackingNumber = 0;
+	public LocalDateTime dateOfArrival;
 	public String liveLocation;
 	public String status;
 
-	public Delivery(int trackingNumber, Date dateOfArrival, String liveLocation, String status) {
+	public Delivery(LocalDateTime localDateTime, String status) {
 		super();
-		this.trackingNumber = trackingNumber;
-		this.dateOfArrival = dateOfArrival;
-		this.liveLocation = liveLocation;
+		Delivery.trackingNumber++;
+		this.dateOfArrival = localDateTime;
 		this.status = status;
 	}
 }

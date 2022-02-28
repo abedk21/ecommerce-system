@@ -36,6 +36,10 @@ public class Cart {
 	}
 	
 	public Checkout proceedToCheckout() {
-		return new Checkout(products, totalNumberOfProducts, totalPrice);
+		Checkout checkout = new Checkout(products, totalNumberOfProducts, totalPrice);
+		products.clear();
+		totalNumberOfProducts = 0;
+		totalPrice = 0;
+		return checkout;
 	}
 }
