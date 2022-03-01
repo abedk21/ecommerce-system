@@ -38,5 +38,10 @@ public class Customer extends User {
 		orders.add(checkout.makePayment());
 		checkout = null;
 	}
+	
+	public void addReview(int rating, String feedback, Product p) {
+		Review review = new Review(rating, feedback, p);
+		p.addReview(review);
+	}
 
 }

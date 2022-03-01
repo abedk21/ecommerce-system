@@ -25,6 +25,9 @@ public class Checkout {
 		//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();  
 		Order order = new Order(now,products);
+		for(int i = 0; i < products.size(); i++) {
+			products.get(i).count--;
+		}
 		return order;
 	}
 	

@@ -14,12 +14,20 @@ public class Retailer extends User {
 	}
 	
 	public void addProduct(int id, String name, float price, int count, String description, String category, float averageRating) {
-		products.add(new Product(id, name, price, count, description, category, averageRating));
+		products.add(new Product(id, name, price, count, description, category));
 	}
 	
-//	public void Product(Product p, int id, String name, float price, int count, String description, String category, float averageRating) {
-//		p.edit(id, name, price, count, description, category, averageRating);
-//	}
+	public void addCount(Product p, int count) {
+		p.count += count;
+	}
+	
+	public void subCount(Product p, int count) {
+		p.count -= count;
+	}
+	
+	public void editProduct(Product p, int id, String name, float price, int count, String description, String category) {
+		p.edit(id, name, price, count, description, category);
+	}
 	
 	public void removeProduct(Product p) {
 		if(products.remove(p)) {
