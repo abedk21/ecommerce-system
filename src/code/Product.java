@@ -9,11 +9,11 @@ public class Product {
 	public float price;
 	public int count;
 	public String description;
-	public String category;
+	public Category category;
 	public float averageRating;
 	public ArrayList<Review> reviews = new ArrayList<Review>();
 
-	public Product(int id, String name, float price, int count, String description, String category) {
+	public Product(int id, String name, float price, int count, String description, Category category) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -24,7 +24,7 @@ public class Product {
 		this.averageRating = 0;
 	}
 	
-	public void edit(int id, String name, float price, int count, String description, String category) {
+	public void edit(int id, String name, float price, int count, String description, Category category) {
 		this.id = id;
 		this.name = name;
 		this.price = price;

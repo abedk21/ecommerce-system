@@ -13,7 +13,7 @@ public class Retailer extends User {
 		this.companyName = companyName;
 	}
 	
-	public void addProduct(int id, String name, float price, int count, String description, String category, float averageRating) {
+	public void addProduct(int id, String name, float price, int count, String description, Category category) {
 		products.add(new Product(id, name, price, count, description, category));
 	}
 	
@@ -25,7 +25,7 @@ public class Retailer extends User {
 		p.count -= count;
 	}
 	
-	public void editProduct(Product p, int id, String name, float price, int count, String description, String category) {
+	public void editProduct(Product p, int id, String name, float price, int count, String description, Category category) {
 		p.edit(id, name, price, count, description, category);
 	}
 	

@@ -17,4 +17,5 @@ public class Refund {
 		this.amount = amount;
 		this.reason = reason;
 	}
+	
 }

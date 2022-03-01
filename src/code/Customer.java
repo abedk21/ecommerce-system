@@ -34,10 +34,20 @@ public class Customer extends User {
 		checkout = null;
 	}
 	
-	public void makePayment() {
-		orders.add(checkout.makePayment());
+	public void makePayment(String paymentMethod, String paymentInfo, float amount) {
+		Payment payment = new Payment(paymentMethod, paymentInfo, amount);
+		try {
+			orders.add(checkout.makePayment(payment));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		checkout = null;
 	}
+	
+//	public void requestRefund(Product p) {
+//	
+//	}
 	
 	public void addReview(int rating, String feedback, Product p) {
 		Review review = new Review(rating, feedback, p);
