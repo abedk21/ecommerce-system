@@ -4,42 +4,56 @@ import java.util.*;
 
 public class Cart {
 	
-	public ArrayList<Product> products;
-	public int totalNumberOfProducts;
+	public ArrayList<CartItem> cartItems;
 	public float totalPrice;
 
 	public Cart() {
 		super();
-		this.products = new ArrayList<Product>();
-		this.totalNumberOfProducts = 0;
+		this.cartItems = new ArrayList<CartItem>();
 		this.totalPrice = 0;
 	}
 	
 	public void add(Product p) {
-		this.products.add(p);
-		this.totalNumberOfProducts = products.size();
+		for(int i = 0; i < cartItems.size(); i++) {
+			if(cartItems.get(i).p == p) {
+				cartItems.get(i).count++;
+				calculateTotalPrice();
+				return;
+			}
+		}
+		cartItems.add(new CartItem(p));
 		calculateTotalPrice();
 	}
 	
-	public void remove(Product p) {
-		this.products.remove(p);
-		this.totalNumberOfProducts = products.size();
-		calculateTotalPrice();
+	public void remove(CartItem c) {
+		for(int i = 0; i < cartItems.size(); i++) {
+			if(cartItems.get(i) == c) {
+				if(cartItems.get(i).count == 1) {
+					cartItems.remove(i);
+				} else {
+					cartItems.get(i).count--;
+				}
+				calculateTotalPrice();
+				return;
+			}
+		}
 	}
 	
 	public void calculateTotalPrice() {
 		float totalPrice = 0;
-		for (int i = 0; i < products.size(); i++) { 
-			totalPrice += products.get(i).price;		
+		for (int i = 0; i < cartItems.size(); i++) { 
+			totalPrice += cartItems.get(i).p.price * cartItems.get(i).count;		
 	      }
 		this.totalPrice = totalPrice;
 	}
 	
 	public Checkout proceedToCheckout() {
-		Checkout checkout = new Checkout(products, totalNumberOfProducts, totalPrice);
-		products.clear();
-		totalNumberOfProducts = 0;
-		totalPrice = 0;
+		Checkout checkout = new Checkout(cartItems, totalPrice);
 		return checkout;
+	}
+	
+	public void empty() {
+		cartItems.clear();
+		this.totalPrice = 0;
 	}
 }

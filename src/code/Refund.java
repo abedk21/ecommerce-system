@@ -1,21 +1,15 @@
 package code;
 
-public class Refund {
-	public int transactionId;
-	public String paymentMethod;
-	private String paymentInfo;
-	public String status;
-	public float amount;
-	public String reason;
+public class Refund extends Transaction {
 
-	public Refund(int transactionId, String paymentMethod, String paymentInfo, String status, float amount, String reason) {
-		super();
-		this.transactionId = transactionId;
-		this.paymentMethod = paymentMethod;
-		this.paymentInfo = paymentInfo;
-		this.status = status;
-		this.amount = amount;
+	public String reason;
+	public ReturnItem returnItem;
+
+	public Refund(ReturnItem returnItem, String paymentMethod, String paymentInfo, String reason) {
+		super(paymentMethod, paymentInfo, returnItem.amount);
 		this.reason = reason;
+		this.status = "Requested";
+		this.returnItem = returnItem;
 	}
 	
 }

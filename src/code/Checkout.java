@@ -8,28 +8,25 @@ public class Checkout {
 	
 	public float finalPrice;
 	public float deliveryCharge = 5;
-	public float taxRate = (float) 0.15;
-	public ArrayList<Product> products;
-	public int totalNumberOfProducts;
+	public float taxRate = (float) 1.15;
+	public ArrayList<CartItem> cartItems;
 	public float totalPrice;
-	public Payment payment;
 
-	public Checkout(ArrayList<Product> products, int totalNumberOfProducts, float totalPrice) {
+	public Checkout(ArrayList<CartItem> cartItems, float totalPrice) {
 		super();
-		this.products = new ArrayList<Product>(products);
-		this.totalNumberOfProducts = totalNumberOfProducts;
+		this.cartItems = new ArrayList<CartItem>(cartItems);
 		this.totalPrice = totalPrice;
-		this.finalPrice = totalPrice + totalPrice*taxRate + deliveryCharge;
+		this.finalPrice = totalPrice*taxRate + deliveryCharge;
 	}
 	
 	public Order makePayment(Payment payment) throws Exception{
-		if(payment.verify(finalPrice)) {
-			//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-			LocalDateTime now = LocalDateTime.now();  
-			Order order = new Order(now,products, payment);
-			for(int i = 0; i < products.size(); i++) {
-				products.get(i).count--;
+		if(payment.verify(finalPrice)) {  
+			ArrayList<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
+			for(int i = 0; i < cartItems.size(); i++) {
+				cartItems.get(i).p.count -= cartItems.get(i).count;
+				purchasedItems.add(new PurchasedItem(cartItems.get(i)));
 			}
+			Order order = new Order(purchasedItems, payment);
 			return order;
 		}
 		throw new Exception("Payment Failed");

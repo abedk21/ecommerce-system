@@ -5,7 +5,8 @@ import java.util.*;
 public class Retailer extends User {
 
 	public String companyName;
-	public ArrayList<Product> products;
+	public static ArrayList<Product> products;
+	public ArrayList<Refund> refundRequests;
 
 	public Retailer(int id, String firstName, String lastName, String email, int phoneNumber, String username,
 			String password, String companyName) {
