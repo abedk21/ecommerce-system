@@ -16,9 +16,11 @@ public class Test {
 		admin.addCategories("Appliances", "Cell Phones & Accessories", "Clothing, Shoes and Jewelry", "Computers", "Electronics", "Food", "Health", "Home & Kitchen", "Movies & TV", "Musical Instruments", "Office Products", "Pet Supplies", "Sports & Outdoors", "Tools & Home Improvement", "Toys & Games");
 		
 		
-		retailer1.addProduct("Iphone 14", 2000, 100, "The most innovative phone in the world.", admin.getCategory("Electronics"));
+		retailer1.addProduct("Iphone 14", 2000, 100, "The most innovative phone in the world.", admin.getCategory("Cell Phones & Accessories"));
+		retailer1.addProduct("Shirt", 50, 50, "Large shirts for men.", admin.getCategory("Clothing, Shoes and Jewelry"));
 		
-		customer1.addToCart(admin.getCategory("Electronics").find("Iphone 14"));
+		customer1.addToCart(admin.getCategory("Cell Phones & Accessories").find("Iphone 14"));
+		customer1.addToCart(admin.getCategory("Clothing, Shoes and Jewelry").find("Shirt"));
 	}
 
 }
