@@ -17,6 +17,8 @@ public class Test {
 		
 		
 		retailer1.addProduct("Iphone 14", 2000, 100, "The most innovative phone in the world.", admin.getCategory("Electronics"));
+		
+		customer1.addToCart(admin.getCategory("Electronics").find("Iphone 14"));
 	}
 
 }
