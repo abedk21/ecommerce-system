@@ -4,18 +4,20 @@ import java.util.*;
 
 public class Retailer extends User {
 
+	public static int id;
 	public String companyName;
 	public static ArrayList<Product> products;
 	public ArrayList<Refund> refundRequests;
 
-	public Retailer(int id, String firstName, String lastName, String email, int phoneNumber, String username,
+	public Retailer(String firstName, String lastName, String email, String phoneNumber, String username,
 			String password, String companyName) {
-		super(id, firstName, lastName, email, phoneNumber, username, password);
+		super(firstName, lastName, email, phoneNumber, username, password);
+		Retailer.id++;
 		this.companyName = companyName;
 	}
 	
-	public void addProduct(int id, String name, float price, int count, String description, Category category) {
-		products.add(new Product(id, name, price, count, description, category));
+	public void addProduct(String name, float price, int count, String description, Category category) {
+		products.add(new Product(name, price, count, description, category));
 	}
 	
 	public void addCount(Product p, int count) {
@@ -26,12 +28,13 @@ public class Retailer extends User {
 		p.count -= count;
 	}
 	
-	public void editProduct(Product p, int id, String name, float price, int count, String description, Category category) {
-		p.edit(id, name, price, count, description, category);
+	public void editProduct(Product p, String name, float price, int count, String description, Category category) {
+		p.edit(name, price, count, description, category);
 	}
 	
 	public void removeProduct(Product p) {
 		if(products.remove(p)) {
+			p.category.removeProduct(p);
 			System.out.println("Product successfully removed");
 		} else{
 			System.out.println("Product cannot be removed");

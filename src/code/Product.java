@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Product {
 	
-	public int id;
+	public static int id;
 	public String name;
 	public float price;
 	public int count;
@@ -13,23 +13,27 @@ public class Product {
 	public float averageRating;
 	public ArrayList<Review> reviews = new ArrayList<Review>();
 
-	public Product(int id, String name, float price, int count, String description, Category category) {
+	public Product(String name, float price, int count, String description, Category category) {
 		super();
-		this.id = id;
+		Product.id++;
 		this.name = name;
 		this.price = price;
 		this.count = 0;
 		this.description = description;
 		this.category = category;
+		category.addProduct(this);
 		this.averageRating = 0;
 	}
 	
-	public void edit(int id, String name, float price, int count, String description, Category category) {
-		this.id = id;
+	public void edit(String name, float price, int count, String description, Category category) {
 		this.name = name;
 		this.price = price;
 		this.count = count;
 		this.description = description;
+		if(category != this.category) {
+			this.category.removeProduct(this);
+			category.addProduct(this);
+		}
 		this.category = category;
 	}
 	

@@ -4,16 +4,18 @@ import java.util.*;
 
 public class Customer extends User {
 
-	public String address;
+	public static int id;
+	public Address address;
 	public Cart cart = new Cart();
 	public Checkout checkout;
 	public ArrayList<Order> orders;
 	public String paymentMethod;
 	public String paymentInfo;
 
-	public Customer(int id, String firstName, String lastName, String email, int phoneNumber, String username,
-			String password, String address) {
-		super(id, firstName, lastName, email, phoneNumber, username, password);
+	public Customer(String firstName, String lastName, String email, String phoneNumber, String username,
+			String password, Address address) {
+		super(firstName, lastName, email, phoneNumber, username, password);
+		Customer.id++;
 		this.address = address;
 	}
 	
