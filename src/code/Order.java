@@ -5,7 +5,6 @@ import java.util.*;
 
 public class Order {
 	
-	//public int id;
 	public LocalDateTime dateOfPurchase;
 	public ArrayList<PurchasedItem> purchasedItems;
 	public static int receiptNumber = 0;
@@ -21,6 +20,16 @@ public class Order {
 		this.purchasedItems = purchasedItems;
 		Order.receiptNumber++;
 		this.payment = payment;
-		delivery = new Delivery(now.plusDays(15),"Shipped");
+		delivery = new Delivery();
 	}
+	
+	public void track() {
+		System.out.println(delivery);
+	}
+	
+	public void cancel() {
+		delivery.status = "Cancelled";
+		System.out.println("Your order has been cancelled.");
+	}
+	
 }

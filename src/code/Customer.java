@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Customer extends User {
 
-	public static int id;
 	public Address address;
 	public Cart cart = new Cart();
 	public Checkout checkout;
@@ -15,7 +14,6 @@ public class Customer extends User {
 	public Customer(String firstName, String lastName, String email, String phoneNumber, String username,
 			String password, Address address) {
 		super(firstName, lastName, email, phoneNumber, username, password);
-		Customer.id++;
 		this.address = address;
 	}
 	
@@ -58,8 +56,7 @@ public class Customer extends User {
 	}
 	
 	public void requestRefund(Retailer r, PurchasedItem purchasedItem, int count, String reason, String paymentMethod, String paymentInfo) {
-		ReturnItem returnItem = new ReturnItem(purchasedItem, count);
-		r.refundRequests.add(new Refund(returnItem, paymentMethod, paymentInfo, reason));
+		r.refundRequests.add(new Refund(purchasedItem, count, paymentMethod, paymentInfo, reason));
 	}
 	
 	public void addReview(int rating, String feedback, Product p) {
