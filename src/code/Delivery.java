@@ -1,7 +1,6 @@
 package code;
 
 import java.time.LocalDateTime;
-import java.util.*;
 
 
 public class Delivery {
@@ -27,7 +26,7 @@ public class Delivery {
 	}
 
 	public String toString() {
-		return "[Tracking Number: "+trackingNumber+", Live Location: "+liveLocation+", Status: "+status+", Date of Arrival: "+dateOfArrival+"]";
+		return String.format("Delivery: [Tracking Number: %d, Live Location: %s, Status: %s, Date of Arrival: %s]", trackingNumber, liveLocation, status, dateOfArrival);
 	}
 }
 

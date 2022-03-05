@@ -19,5 +19,9 @@ public class PurchasedItem {
 		this.dateOfPurchase = now;
 		this.count = c.count;
 	}
+	
+	public String toString() {
+		return String.format("[Name: %s, Price After Tax: $%.2f, Count: %d]", p.name, amountPaidPerItem, count);
+	}
 
 }

@@ -7,7 +7,7 @@ public class Customer extends User {
 	public Address address;
 	public Cart cart = new Cart();
 	public Checkout checkout;
-	public ArrayList<Order> orders;
+	public ArrayList<Order> orders = new ArrayList<Order>();
 	public String paymentMethod;
 	public String paymentInfo;
 
@@ -15,6 +15,12 @@ public class Customer extends User {
 			String password, Address address) {
 		super(firstName, lastName, email, phoneNumber, username, password);
 		this.address = address;
+	}
+	
+	public void addToCart(Product p, int count) {
+		for(int i = 0; i < count; i++) {
+			cart.add(p);
+		}
 	}
 	
 	public void addToCart(Product p) {
@@ -59,7 +65,7 @@ public class Customer extends User {
 		r.refundRequests.add(new Refund(purchasedItem, count, paymentMethod, paymentInfo, reason));
 	}
 	
-	public void addReview(int rating, String feedback, Product p) {
+	public void addReview(double rating, String feedback, Product p) {
 		Review review = new Review(rating, feedback, p);
 		p.addReview(review);
 	}

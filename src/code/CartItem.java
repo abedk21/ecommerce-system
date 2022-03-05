@@ -10,5 +10,9 @@ public class CartItem {
 		this.p = p;
 		this.count = 1;
 	}
+	
+	public String toString() {
+		return String.format("[Name: %s, Price: $%.2f, Count: %d]", p.name, p.price, count);
+	}
 
 }

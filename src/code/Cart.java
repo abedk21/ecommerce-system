@@ -56,4 +56,16 @@ public class Cart {
 		cartItems.clear();
 		this.totalPrice = 0;
 	}
+	
+	public String toString() {
+		String cart = "Cart: [Items: [";
+		for (int i = 0; i < cartItems.size(); i++) {
+			if (i != 0) {
+				cart += ", ";
+			}
+			cart += cartItems.get(i);
+	      }
+		cart += "]" +", Total Price: $" + totalPrice + "]";
+		return cart;
+	}
 }

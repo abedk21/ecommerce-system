@@ -1,6 +1,5 @@
 package code;
 
-import java.time.*;
 //import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -8,7 +7,7 @@ public class Checkout {
 	
 	public float finalPrice;
 	public float deliveryCharge = 5;
-	public float taxRate = (float) 1.15;
+	public float taxRate = 15;
 	public ArrayList<CartItem> cartItems;
 	public float totalPrice;
 
@@ -16,7 +15,7 @@ public class Checkout {
 		super();
 		this.cartItems = new ArrayList<CartItem>(cartItems);
 		this.totalPrice = totalPrice;
-		this.finalPrice = totalPrice*taxRate + deliveryCharge;
+		this.finalPrice = totalPrice* (taxRate/100 + 1) + deliveryCharge;
 	}
 	
 	public Order makePayment(Payment payment) throws Exception{
@@ -30,6 +29,18 @@ public class Checkout {
 			return order;
 		}
 		throw new Exception("Payment Failed");
+	}
+	
+	public String toString() {
+		String checkout = "Checkout: [Items: [";
+		for (int i = 0; i < cartItems.size(); i++) {
+			if (i != 0) {
+				checkout += ", ";
+			}
+			checkout += cartItems.get(i);
+	      }
+		checkout += "]" +", Total Price: $" + totalPrice + ", Added Tax: " + taxRate + "%, Delivery Charge: $" + deliveryCharge + ", Final Price: $" + finalPrice + "]";
+		return checkout;
 	}
 	
 }

@@ -5,7 +5,7 @@ import java.util.*;
 public class Retailer extends User {
 
 	public String companyName;
-	public static ArrayList<Product> products;
+	public static ArrayList<Product> products = new ArrayList<Product>();
 	public ArrayList<Refund> refundRequests;
 
 	public Retailer(String firstName, String lastName, String email, String phoneNumber, String username,

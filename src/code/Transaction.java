@@ -5,7 +5,7 @@ public abstract class Transaction {
 	public static int transactionId;
 	public String paymentMethod;
 	private String paymentInfo;
-	public String status;
+	public String status = "Approved";
 	public float amount;
 
 	public Transaction(String paymentMethod, String paymentInfo, float amount) {

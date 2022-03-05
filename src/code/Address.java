@@ -14,4 +14,11 @@ public class Address {
 		this.city = city;
 		this.country = country;
 	}
+	
+	public void changeAddress(String street, String postalCode, String city, String country) {
+		this.street = street;
+		this.postalCode = postalCode;
+		this.city = city;
+		this.country = country;
+	}
 }

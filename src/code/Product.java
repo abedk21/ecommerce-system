@@ -18,7 +18,7 @@ public class Product {
 		Product.id++;
 		this.name = name;
 		this.price = price;
-		this.count = 0;
+		this.count = count;
 		this.description = description;
 		this.category = category;
 		category.addProduct(this);
@@ -40,9 +40,24 @@ public class Product {
 	public void addReview(Review review) {
 		reviews.add(review);
 		float sum = 0;
-		for (int i = 0; i <= reviews.size(); i++) {
+		for (int i = 0; i < reviews.size(); i++) {
 			sum += reviews.get(i).rating;
 		}
 		averageRating = sum/reviews.size();
+	}
+	
+	public String toString() {
+		String reviews = "[";
+		if(!this.reviews.isEmpty()) {
+			for(int i = 0; i < this.reviews.size(); i++) {
+				if(i != this.reviews.size() -1) {
+					reviews += this.reviews.get(i) + ", ";
+				} else {
+					reviews += this.reviews.get(i);
+				}
+			}
+		}
+		reviews += "]";
+		return String.format("Product: [Name: %s, Price: $%.2f, Count: %d, Description: %s, Category: %s, Average Rating: %.2f, Reviews: %s]", name, price, count, description, category.name, averageRating, reviews);
 	}
 }

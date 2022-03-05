@@ -32,4 +32,16 @@ public class Order {
 		System.out.println("Your order has been cancelled.");
 	}
 	
+	public String toString() {
+		String order = "Order Receipt: [Purchased Items: [";
+		for (int i = 0; i < purchasedItems.size(); i++) {
+			if (i != 0) {
+				order += ", ";
+			}
+			order += purchasedItems.get(i);
+	      }
+		order += "]" +", Total Amount Paid: $" + payment.amount + ", Date of Purchase: " + dateOfPurchase +"]";
+		return order;
+	}
+	
 }
