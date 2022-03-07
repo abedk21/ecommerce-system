@@ -20,6 +20,10 @@ public class PurchasedItem {
 		this.count = c.count;
 	}
 	
+	public void requestRefund(int count, String reason) {
+		p.retailer.refundRequests.add(new Refund(this, count, reason));
+	}
+	
 	public String toString() {
 		return String.format("[Name: %s, Price After Tax: $%.2f, Count: %d]", p.name, amountPaidPerItem, count);
 	}

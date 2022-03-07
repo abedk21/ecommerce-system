@@ -16,6 +16,11 @@ public abstract class Transaction {
 		this.amount = amount;
 	}
 	
+	public Transaction(float amount) {
+		Payment.transactionId++;
+		this.amount = amount;
+	}
+
 	public boolean verify(float finalPrice) {
 		if(finalPrice != amount) {
 			return false;

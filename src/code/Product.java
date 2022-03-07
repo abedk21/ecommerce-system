@@ -10,10 +10,11 @@ public class Product {
 	public int count;
 	public String description;
 	public Category category;
+	public Retailer retailer;
 	public float averageRating;
 	public ArrayList<Review> reviews = new ArrayList<Review>();
 
-	public Product(String name, float price, int count, String description, Category category) {
+	public Product(String name, float price, int count, String description, Category category, Retailer retailer) {
 		super();
 		Product.id++;
 		this.name = name;
@@ -21,6 +22,7 @@ public class Product {
 		this.count = count;
 		this.description = description;
 		this.category = category;
+		this.retailer = retailer;
 		category.addProduct(this);
 		this.averageRating = 0;
 	}
@@ -35,6 +37,26 @@ public class Product {
 			category.addProduct(this);
 		}
 		this.category = category;
+	}
+	
+	public void addToCart(Cart cart, int count) {
+		for(int i = 0; i < count; i++) {
+			cart.add(this);
+		}
+	}
+	
+	public void addToCart(Cart cart) {
+		cart.add(this);
+	}
+	
+	public void addReview(double rating) {
+		Review review = new Review(rating, this);
+		addReview(review);
+	}
+	
+	public void addReview(double rating, String feedback) {
+		Review review = new Review(rating, feedback, this);
+		addReview(review);
 	}
 	
 	public void addReview(Review review) {

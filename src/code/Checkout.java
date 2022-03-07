@@ -10,25 +10,33 @@ public class Checkout {
 	public float taxRate = 15;
 	public ArrayList<CartItem> cartItems;
 	public float totalPrice;
+	public Cart cart;
 
-	public Checkout(ArrayList<CartItem> cartItems, float totalPrice) {
+	public Checkout(Cart cart, float totalPrice) {
 		super();
-		this.cartItems = new ArrayList<CartItem>(cartItems);
+		this.cartItems = new ArrayList<CartItem>(cart.cartItems);
 		this.totalPrice = totalPrice;
 		this.finalPrice = totalPrice* (taxRate/100 + 1) + deliveryCharge;
 	}
 	
-	public Order makePayment(Payment payment) throws Exception{
+	public void makePayment(String paymentMethod, String paymentInfo, float amount) {
+		Payment payment = new Payment(paymentMethod, paymentInfo, amount);
 		if(payment.verify(finalPrice)) {  
 			ArrayList<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
 			for(int i = 0; i < cartItems.size(); i++) {
 				cartItems.get(i).p.count -= cartItems.get(i).count;
 				purchasedItems.add(new PurchasedItem(cartItems.get(i)));
 			}
-			Order order = new Order(purchasedItems, payment);
-			return order;
+			Order order = new Order(purchasedItems, payment, cart.customer.address);
+			cart.customer.orders.add(order);
+			cart.empty();
+		} else {
+			System.out.println("Payment Failed");
 		}
-		throw new Exception("Payment Failed");
+	}
+	
+	public void cancelCheckout() {
+		cart.checkout = null;
 	}
 	
 	public String toString() {

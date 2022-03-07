@@ -5,12 +5,15 @@ import java.util.*;
 public class Cart {
 	
 	public ArrayList<CartItem> cartItems;
+	public Checkout checkout;
+	public Customer customer;
 	public float totalPrice;
 
-	public Cart() {
+	public Cart(Customer customer) {
 		super();
 		this.cartItems = new ArrayList<CartItem>();
 		this.totalPrice = 0;
+		this.customer = customer;
 	}
 	
 	public void add(Product p) {
@@ -21,17 +24,17 @@ public class Cart {
 				return;
 			}
 		}
-		cartItems.add(new CartItem(p));
+		cartItems.add(new CartItem(p, this));
 		calculateTotalPrice();
 	}
 	
-	public void remove(CartItem c) {
+	public void remove(CartItem c, int count) {
 		for(int i = 0; i < cartItems.size(); i++) {
 			if(cartItems.get(i) == c) {
 				if(cartItems.get(i).count == 1) {
 					cartItems.remove(i);
 				} else {
-					cartItems.get(i).count--;
+					cartItems.get(i).count-= count;
 				}
 				calculateTotalPrice();
 				return;
@@ -47,9 +50,8 @@ public class Cart {
 		this.totalPrice = totalPrice;
 	}
 	
-	public Checkout proceedToCheckout() {
-		Checkout checkout = new Checkout(cartItems, totalPrice);
-		return checkout;
+	public void proceedToCheckout() {
+		checkout = new Checkout(this, totalPrice);
 	}
 	
 	public void empty() {

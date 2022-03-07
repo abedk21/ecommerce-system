@@ -15,7 +15,7 @@ public class Retailer extends User {
 	}
 	
 	public void addProduct(String name, float price, int count, String description, Category category) {
-		products.add(new Product(name, price, count, description, category));
+		products.add(new Product(name, price, count, description, category, this));
 	}
 	
 	public void editProduct(Product p, String name, float price, int count, String description, Category category) {

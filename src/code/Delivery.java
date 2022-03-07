@@ -6,14 +6,16 @@ import java.time.LocalDateTime;
 public class Delivery {
 	
 	public static int trackingNumber;
+	public Address address;
 	public LocalDateTime dateOfArrival;
 	public String liveLocation;
 	public String status;
 	public int maxDays = 15;
 
-	public Delivery() {
+	public Delivery(Address address) {
 		super();
 		Delivery.trackingNumber++;
+		this.address = address;
 		this.dateOfArrival = LocalDateTime.now().plusDays(maxDays);
 		this.liveLocation = "NA";
 		this.status = "Shipped";
@@ -26,7 +28,7 @@ public class Delivery {
 	}
 
 	public String toString() {
-		return String.format("Delivery: [Tracking Number: %d, Live Location: %s, Status: %s, Date of Arrival: %s]", trackingNumber, liveLocation, status, dateOfArrival);
+		return String.format("Delivery: [Tracking Number: %d, Live Location: %s, Status: %s, Shipping To: %s, Date of Arrival: %s]", trackingNumber, liveLocation, status, address, dateOfArrival);
 	}
 }
 

@@ -11,7 +11,7 @@ public class Order {
 	public Delivery delivery;
 	public Payment payment;
 
-	public Order(ArrayList<PurchasedItem> purchasedItems, Payment payment) {
+	public Order(ArrayList<PurchasedItem> purchasedItems, Payment payment, Address address) {
 		super();
 		//this.id = id;
 		//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
@@ -20,7 +20,7 @@ public class Order {
 		this.purchasedItems = purchasedItems;
 		Order.receiptNumber++;
 		this.payment = payment;
-		delivery = new Delivery();
+		delivery = new Delivery(address);
 	}
 	
 	public void track() {

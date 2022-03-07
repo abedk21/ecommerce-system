@@ -29,24 +29,24 @@ public class Test {
 		retailer1.addProduct("Shirt", 50, 50, "Large shirts for men.", CategoryList.getCategory("Clothing, Shoes and Jewelry"));
 		retailer1.addProduct("Vaccuum Cleaner", 10, 300, "A vaccuum cleaner that clean your house.", CategoryList.getCategory("Appliances"));
 		
-		customer1.addToCart(CategoryList.getCategory("Cell Phones & Accessories").find("Iphone 14"), 3);
+		CategoryList.getCategory("Cell Phones & Accessories").find("Iphone 14").addToCart(customer1.cart, 3);
 		System.out.println(CategoryList.getCategory("Cell Phones & Accessories").find("Iphone 14"));
-		customer1.addToCart(CategoryList.getCategory("Clothing, Shoes and Jewelry").find("Shirt"));
-		customer1.addToCart(CategoryList.getCategory("Appliances").find("Vaccuum Cleaner"));
+		CategoryList.getCategory("Clothing, Shoes and Jewelry").find("Shirt").addToCart(customer1.cart);
+		CategoryList.getCategory("Appliances").find("Vaccuum Cleaner").addToCart(customer1.cart);
 		
 		System.out.println(customer1.cart);
 		
-		customer1.proceedToCheckout();
+		customer1.cart.proceedToCheckout();
 		
-		System.out.println(customer1.checkout);
+		System.out.println(customer1.cart.checkout);
 		
-		customer1.makePayment("Visa Debit Card", "My visa card", 6974);
+		customer1.cart.checkout.makePayment("Visa Debit Card", "My visa card", 6974);
 		
 		System.out.println(customer1.orders);
 		
 		System.out.println(customer1.orders.get(0).delivery);
 		
-		customer1.addReview(4.5, "I really liked this phone!", CategoryList.getCategory("Cell Phones & Accessories").find("Iphone 14"));
+		CategoryList.getCategory("Cell Phones & Accessories").find("Iphone 14").addReview(4.5, "I really liked this phone!");
 		
 		System.out.println(CategoryList.getCategory("Cell Phones & Accessories").find("Iphone 14"));
 	}

@@ -13,7 +13,15 @@ public class Review {
 		this.p = p;
 	}
 	
+	public Review(double rating, Product p) {
+		this.rating = rating;
+		this.p = p;
+	}
+
 	public String toString() {
+		if(feedback == null) {
+			return String.format("[Rating: %.2f]", rating);
+		}
 		return String.format("[Rating: %.2f, Feedback: %s]", rating, feedback);
 	}
 }
