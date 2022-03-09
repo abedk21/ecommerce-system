@@ -15,5 +15,8 @@ public class Customer extends User {
 		super(firstName, lastName, email, phoneNumber, username, password);
 		this.address = address;
 	}
-
+	
+	public String toString() {
+		return String.format("Customer: [First Name: %s, Last Name: %s, Email: %s, Phone Number: %s, Username: %s, %s]", firstName, lastName, email, phoneNumber, username, address);
+	}
 }

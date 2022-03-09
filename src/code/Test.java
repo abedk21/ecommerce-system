@@ -29,10 +29,10 @@ public class Test {
 		retailer1.addProduct("Shirt", 50, 50, "Large shirts for men.", CategoryList.getCategory("Clothing, Shoes and Jewelry"));
 		retailer1.addProduct("Vaccuum Cleaner", 10, 300, "A vaccuum cleaner that clean your house.", CategoryList.getCategory("Appliances"));
 		
-		CategoryList.getCategory("Cell Phones & Accessories").find("Iphone 14").addToCart(customer1.cart, 3);
-		System.out.println(CategoryList.getCategory("Cell Phones & Accessories").find("Iphone 14"));
-		CategoryList.getCategory("Clothing, Shoes and Jewelry").find("Shirt").addToCart(customer1.cart);
-		CategoryList.getCategory("Appliances").find("Vaccuum Cleaner").addToCart(customer1.cart);
+		CategoryList.getCategory("Cell Phones & Accessories").findProduct("Iphone 14").addToCart(customer1.cart, 3);
+		System.out.println(CategoryList.getCategory("Cell Phones & Accessories").findProduct("Iphone 14"));
+		CategoryList.getCategory("Clothing, Shoes and Jewelry").findProduct("Shirt").addToCart(customer1.cart);
+		CategoryList.getCategory("Appliances").findProduct("Vaccuum Cleaner").addToCart(customer1.cart);
 		
 		System.out.println(customer1.cart);
 		
@@ -46,9 +46,9 @@ public class Test {
 		
 		System.out.println(customer1.orders.get(0).delivery);
 		
-		CategoryList.getCategory("Cell Phones & Accessories").find("Iphone 14").addReview(4.5, "I really liked this phone!");
+		CategoryList.getCategory("Cell Phones & Accessories").findProduct("Iphone 14").addReview(4.5, "I really liked this phone!");
 		
-		System.out.println(CategoryList.getCategory("Cell Phones & Accessories").find("Iphone 14"));
+		System.out.println(CategoryList.getCategory("Cell Phones & Accessories").findProduct("Iphone 14"));
 	}
 
 }

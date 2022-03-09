@@ -21,10 +21,6 @@ public class Administrator {
 		}
 	}
 	
-	public void editCategory(Category category, String name) {
-		category.name = name;
-	}
-	
 	public void removeCategory(Category category) {
 		CategoryList.categories.remove(category);
 	}

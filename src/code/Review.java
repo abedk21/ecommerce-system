@@ -17,6 +17,11 @@ public class Review {
 		this.rating = rating;
 		this.p = p;
 	}
+	
+	public void edit(double rating, String feedback) {
+		this.rating = rating;
+		this.feedback = feedback;
+	}
 
 	public String toString() {
 		if(feedback == null) {

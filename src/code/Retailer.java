@@ -18,10 +18,6 @@ public class Retailer extends User {
 		products.add(new Product(name, price, count, description, category, this));
 	}
 	
-	public void editProduct(Product p, String name, float price, int count, String description, Category category) {
-		p.edit(name, price, count, description, category);
-	}
-	
 	public void removeProduct(Product p) {
 		if(products.remove(p)) {
 			p.category.removeProduct(p);
@@ -29,6 +25,10 @@ public class Retailer extends User {
 		} else{
 			System.out.println("Product cannot be removed");
 		};
+	}
+	
+	public String toString() {
+		return String.format("Retailer: [First Name: %s, Last Name: %s, Email: %s, Phone Number: %s, Username: %s, Company Name: %s]", firstName, lastName, email, phoneNumber, username, companyName);
 	}
 
 }

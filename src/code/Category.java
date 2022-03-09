@@ -19,8 +19,12 @@ public class Category {
 	public void removeProduct(Product p) {
 		products.remove(p);
 	}
+	
+	public void edit(String name) {
+		this.name = name;
+	}
 
-	public Product find(String name) {
+	public Product findProduct(String name) {
 		for(int i = 0; i <= products.size(); i++) {
 			if(products.get(i).name == name) {
 				return products.get(i);
