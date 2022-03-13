@@ -49,7 +49,7 @@ public class Order {
 	}
 	
 	public String toString() {
-		String order = "Order Receipt: [Purchased Items: [";
+		String order = "Order Receipt: [Receipt Number: " + receiptNumber + " ,Purchased Items: [";
 		for (int i = 0; i < purchasedItems.size(); i++) {
 			if (i != 0) {
 				order += ", ";

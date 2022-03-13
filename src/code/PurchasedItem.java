@@ -31,7 +31,7 @@ public class PurchasedItem {
 	
 	public void requestRefund(int count, String reason) throws Exception {
 		if(!canRequestRefund()) {
-			throw new Exception("You can't request a refund.");
+			throw new Exception("You can't request a refund at this time.");
 		}
 		p.retailer.refundRequests.add(new Refund(this, count, reason));
 	}

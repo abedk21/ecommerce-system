@@ -53,6 +53,8 @@ public class Test {
 		retailer1.addProduct("Iphone 14", 1000, 100, "The most innovative phone in the world.", CategoryList.getCategory("Cell Phones & Accessories"));
 		retailer1.addProduct("Macbook Pro", 2000, 100, "The most innovative laptop in the world.", CategoryList.getCategory("Electronics"));
 		retailer1.addProduct("Shirt", 50, 50, "Large shirts for men.", CategoryList.getCategory("Clothing, Shoes and Jewelry"));
+		retailer1.addProduct("Socks", 10, 50, "Socks", CategoryList.getCategory("Clothing, Shoes and Jewelry"));
+		retailer1.addProduct("Bread", 3, 50, "Bread for eating.", CategoryList.getCategory("Food"));
 		retailer1.addProduct("Vaccuum Cleaner", 100, 300, "A vaccuum cleaner that cleans your house.", CategoryList.getCategory("Appliances"));
 		retailer1.addProduct("Xbox One", 600, 60, "Microsoft gaming console.", CategoryList.getCategory("Electronics"));
 		retailer1.addProduct("PS5", 600, 80, "Sony gaming console.", CategoryList.getCategory("Electronics"));
@@ -93,6 +95,9 @@ public class Test {
 		CategoryList.getCategory("Clothing, Shoes and Jewelry").findProduct("Shirt").addToCart(customer2.cart, 5);
 		CategoryList.getCategory("Appliances").findProduct("Vaccuum Cleaner").addToCart(customer2.cart);
 		
+	    //customer3 adds the following products to their cart
+		CategoryList.getCategory("Clothing, Shoes and Jewelry").findProduct("Socks").addToCart(customer3.cart);
+		
 		//Attempting to add to the cart more than the actual count of the product. An exception is thrown.		
 	    try {
 	    	CategoryList.getCategory("Appliances").findProduct("Vaccuum Cleaner").addToCart(customer1.cart, 301);
@@ -117,15 +122,59 @@ public class Test {
 		
 		System.out.println(customer2.cart);
 		
+		System.out.println(customer3.cart);
+		
 		//customer1 proceeds to checkout
 		customer1.cart.proceedToCheckout();
 		
 		//customer2 proceeds to checkout
 		customer2.cart.proceedToCheckout();
 		
+		//customer3 proceeds to checkout. There's a $5 delivery charge because the total price is less than $50.
+		customer3.cart.proceedToCheckout();
+		
 		System.out.println(customer1.cart.checkout);
 		
 		System.out.println(customer2.cart.checkout);
+		
+		System.out.println(customer3.cart.checkout);
+		
+		customer3.cart.checkout.cancelCheckout();
+		
+		//Checkout will be cancelled
+		System.out.println(customer3.cart.checkout);
+		
+		//Emptying cart of customer3
+		customer3.cart.empty();
+		
+	    //customer3 tries to add more than 50 items to their cart
+		CategoryList.getCategory("Cell Phones & Accessories").findProduct("Iphone 14").addToCart(customer3.cart, 5);
+		CategoryList.getCategory("Clothing, Shoes and Jewelry").findProduct("Shirt").addToCart(customer3.cart, 5);
+		CategoryList.getCategory("Clothing, Shoes and Jewelry").findProduct("Socks").addToCart(customer3.cart, 5);
+		CategoryList.getCategory("Electronics").findProduct("Macbook Pro").addToCart(customer3.cart, 5);
+		CategoryList.getCategory("Appliances").findProduct("Vaccuum Cleaner").addToCart(customer3.cart, 5);
+		CategoryList.getCategory("Appliances").findProduct("Microwave").addToCart(customer3.cart, 5);
+		CategoryList.getCategory("Appliances").findProduct("Toaster").addToCart(customer3.cart, 5);
+		CategoryList.getCategory("Electronics").findProduct("Xbox One").addToCart(customer3.cart, 5);
+		CategoryList.getCategory("Electronics").findProduct("PS5").addToCart(customer3.cart, 5);
+		CategoryList.getCategory("Electronics").findProduct("Nintendo Switch").addToCart(customer3.cart, 5);
+		
+	    try {
+	    	CategoryList.getCategory("Food").findProduct("Bread").addToCart(customer3.cart, 5);
+	      } catch (Exception e) {
+	        System.out.println(e);
+	      }
+		
+		
+		System.out.println(customer3.cart.totalCount);
+		
+		
+		//Emptying cart of customer3
+		customer3.cart.empty();
+		
+		//customer3 adds the following products to cart
+		CategoryList.getCategory("Appliances").findProduct("Toaster").addToCart(customer3.cart);
+		CategoryList.getCategory("Electronics").findProduct("Xbox One").addToCart(customer3.cart);
 		
 		//Attempting to make payment with a different amount than the amount required. An exception is thrown.		
 	    try {
@@ -140,6 +189,9 @@ public class Test {
 		//customer1 makes a payment
 		customer1.cart.checkout.makePayment("Visa Debit Card", "My visa card", customer1.cart.checkout.finalPrice);
 		
+		//Cart should be empty
+		System.out.println(customer1.cart);
+		
 		//customer2 makes a payment
 		customer2.cart.checkout.makePayment("Paypal", "My paypal account", customer2.cart.checkout.finalPrice);
 		
@@ -147,13 +199,20 @@ public class Test {
 		System.out.println(customer1.orders);
 		
 		
-		System.out.println(customer1.orders.get(0).delivery);
+		customer1.orders.get(0).track();
+		
+		//Attempting to cancel order before date of arrival. An exception is thrown.		
+	    try {
+	    	customer1.orders.get(0).cancel();
+	      } catch (Exception e) {
+	        System.out.println(e);
+	      }
 		
 		
 		System.out.println(customer2.orders);
 		
 		
-		System.out.println(customer2.orders.get(0).delivery);
+		customer2.orders.get(0).track();
 		
 		//Attempting to add a review with rating that is not between 0 and 5. An exception is thrown.		
 	    try {

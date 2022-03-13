@@ -21,13 +21,14 @@ public class Cart {
 		for(int i = 0; i < cartItems.size(); i++) {
 			if(cartItems.get(i).p == p) {
 				cartItems.get(i).count++;
+				totalCount++;
 				calculateTotalPrice();
 				return;
 			}
 		}
 		cartItems.add(new CartItem(p, this));
-		calculateTotalPrice(); //update total price
 		totalCount++;
+		calculateTotalPrice(); //update total price
 	}
 	
 //	14. When a cart item is removed from cart, its price will be subtracted from the cart’s total price.
@@ -41,8 +42,10 @@ public class Cart {
 			if(cartItems.get(i) == c) {
 				if(cartItems.get(i).count == 1) {
 					cartItems.remove(i);
+					totalCount--;
 				} else {
 					cartItems.get(i).count-= count;
+					totalCount-=count;
 				}
 				calculateTotalPrice(); //update total price
 				return;
@@ -74,6 +77,7 @@ public class Cart {
 	public void empty() {
 		cartItems.clear();
 		this.totalPrice = 0;
+		this.totalCount = 0;
 	}
 	
 	public String toString() {
