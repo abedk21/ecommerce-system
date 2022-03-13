@@ -30,7 +30,7 @@ public class PurchasedItem {
 //	post: self.Refund -> includes(r) AND r.status = “Requested”
 	
 	public void requestRefund(int count, String reason) throws Exception {
-		if(canRequestRefund()) {
+		if(!canRequestRefund()) {
 			throw new Exception("You can't request a refund.");
 		}
 		p.retailer.refundRequests.add(new Refund(this, count, reason));

@@ -6,7 +6,7 @@ public class Retailer extends User {
 
 	public String companyName;
 	public static ArrayList<Product> products = new ArrayList<Product>();
-	public ArrayList<Refund> refundRequests;
+	public ArrayList<Refund> refundRequests = new ArrayList<Refund>();
 
 	public Retailer(String firstName, String lastName, String email, String phoneNumber, String username,
 			String password, String companyName) {
