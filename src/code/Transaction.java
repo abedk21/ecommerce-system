@@ -5,7 +5,8 @@ public abstract class Transaction {
 	public static int transactionId;
 	public String paymentMethod;
 	private String paymentInfo;
-	public String status = "Approved";
+	public String status;
+	public static String tempStatus;
 	public float amount;
 
 	public Transaction(String paymentMethod, String paymentInfo, float amount) {
@@ -14,6 +15,7 @@ public abstract class Transaction {
 		this.paymentMethod = paymentMethod;
 		this.setPaymentInfo(paymentInfo);
 		this.amount = amount;
+		this.status = tempStatus;
 	}
 	
 	public Transaction(float amount) {
@@ -23,6 +25,7 @@ public abstract class Transaction {
 
 	public boolean verify(float finalPrice) {
 		if(finalPrice != amount) {
+			this.status = "Failed";
 			return false;
 		}
 		
@@ -31,10 +34,6 @@ public abstract class Transaction {
 		}
 		
 		return true;
-	}
-	
-	public void updateStatus(String status) {
-		this.status = status;
 	}
 
 	public String getPaymentInfo() {

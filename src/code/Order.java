@@ -7,18 +7,24 @@ public class Order {
 	
 	public LocalDateTime dateOfPurchase;
 	public ArrayList<PurchasedItem> purchasedItems;
-	public static int receiptNumber = 0;
+	private static int counter;
+	public int receiptNumber;
 	public Delivery delivery;
 	public Payment payment;
 
-	public Order(ArrayList<PurchasedItem> purchasedItems, Payment payment, Address address) {
+	public Order(Payment payment, Address address) {
 		super();
 		//this.id = id;
 		//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();
 		this.dateOfPurchase = now;
-		this.purchasedItems = purchasedItems;
-		Order.receiptNumber++;
+		
+//		5. Two  orders can not have the same receipt number.
+//		Context order
+//		Inv: allInstances()->forAll(o1,o2 :Order|o1<>o2 implies o1.receiptNumber<>o2.receiptNumber)
+		
+		Order.counter++;
+		this.receiptNumber = counter;
 		this.payment = payment;
 		delivery = new Delivery(address);
 	}
@@ -27,9 +33,19 @@ public class Order {
 		System.out.println(delivery);
 	}
 	
-	public void cancel() {
-		delivery.status = "Cancelled";
-		System.out.println("Your order has been cancelled.");
+//	11. The delivery should be cancelled when it doesn’t arrive on time.
+//	Context Delivery
+//	inv: self.status = “Cancelled” implies ( (Day(today) - Day(dateOfArrival)) > 0 AND self.status <> “Arrived”)
+	
+	public void cancel() throws Exception {
+		if(LocalDateTime.now().compareTo(this.delivery.dateOfArrival) > 0 && this.delivery.status != "Arrived") {
+			delivery.status = "Cancelled";
+			System.out.println("Your order has been cancelled.");
+		}
+		else {
+			throw new Exception("Order can't be cancelled at this time.");
+		}
+		
 	}
 	
 	public String toString() {

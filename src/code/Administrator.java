@@ -1,14 +1,14 @@
 package code;
 
-import java.util.*;
-
 public class Administrator {
 	
-	public static int id;
+	public static int counter;
+	public int id;
 
 	public Administrator() {
 		super();
-		Administrator.id++;
+		Administrator.counter++;
+		this.id = counter;
 	}
 	
 	public void addCategory(String name) {

@@ -5,7 +5,8 @@ import java.time.LocalDateTime;
 
 public class Delivery {
 	
-	public static int trackingNumber;
+	public int trackingNumber;
+	public static int counter;
 	public Address address;
 	public LocalDateTime dateOfArrival;
 	public String liveLocation;
@@ -14,7 +15,8 @@ public class Delivery {
 
 	public Delivery(Address address) {
 		super();
-		Delivery.trackingNumber++;
+		Delivery.counter++;
+		this.trackingNumber = counter;
 		this.address = address;
 		this.dateOfArrival = LocalDateTime.now().plusDays(maxDays);
 		this.liveLocation = "NA";

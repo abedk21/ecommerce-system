@@ -14,10 +14,28 @@ public class Retailer extends User {
 		this.companyName = companyName;
 	}
 	
-	public void addProduct(String name, float price, int count, String description, Category category) {
+//	2. The retailer cannot add the same product again to avoid redundancy.
+//	Context Retailer::addProduct(P:product)
+//	pre: self.Product->excludes(P)
+//	post: self.Product->includes(P)
+
+	
+	public void addProduct(String name, float price, int count, String description, Category category) throws Exception {
+		if(checkProduct(name)) {
+			throw new Exception("Product already exists.");
+		}
 		products.add(new Product(name, price, count, description, category, this));
 	}
 	
+	private boolean checkProduct(String name) {
+		for(int i = 0; i < products.size(); i++) {
+			if(products.get(i).name == name) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void removeProduct(Product p) {
 		if(products.remove(p)) {
 			p.category.removeProduct(p);

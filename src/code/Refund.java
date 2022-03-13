@@ -6,8 +6,7 @@ public class Refund extends Transaction {
 
 	public String reason;
 	public PurchasedItem purchasedItem;
-	public int daysLimit = 30;
-	public int processingDays = 7;
+	public static int daysLimit = 30;
 	public LocalDateTime dateRequested;
 
 	public Refund(PurchasedItem purchasedItem, int count, String reason) {
@@ -18,21 +17,14 @@ public class Refund extends Transaction {
 		this.dateRequested = LocalDateTime.now();
 	}
 	
-	public void payRefund(String paymentMethod, String paymentInfo) {
+	public void pay(String paymentMethod, String paymentInfo) {
+		this.status = "Paid";
 		this.paymentMethod = paymentMethod;
 		this.setPaymentInfo(paymentInfo);
 	}
 	
-	public void cancelRefund() {
+	public void c() {
 		this.status = "Cancelled";
-	}
-	
-	public boolean canRequestRefund(LocalDateTime dateOfPurchase) {
-		return LocalDateTime.now().compareTo(dateOfPurchase) <= daysLimit;
-	}
-	
-	public boolean canProcessRefund() {
-		return LocalDateTime.now().compareTo(dateRequested) <= processingDays;
 	}
 	
 }

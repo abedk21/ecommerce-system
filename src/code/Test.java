@@ -24,10 +24,13 @@ public class Test {
 		admin.addCategories("Appliances", "Cell Phones & Accessories", "Clothing, Shoes and Jewelry", "Computers", "Electronics", "Food", "Health", "Home & Kitchen", "Movies & TV", "Musical Instruments", "Office Products", "Pet Supplies", "Sports & Outdoors", "Tools & Home Improvement", "Toys & Games");
 		
 		
-		retailer1.addProduct("Iphone 14", 2000, 100, "The most innovative phone in the world.", CategoryList.getCategory("Cell Phones & Accessories"));
-		retailer1.addProduct("Macbook Pro", 5000, 100, "The most innovative laptop in the world.", CategoryList.getCategory("Electronics"));
+		retailer1.addProduct("Iphone 14", 1000, 100, "The most innovative phone in the world.", CategoryList.getCategory("Cell Phones & Accessories"));
+		retailer1.addProduct("Macbook Pro", 2000, 100, "The most innovative laptop in the world.", CategoryList.getCategory("Electronics"));
 		retailer1.addProduct("Shirt", 50, 50, "Large shirts for men.", CategoryList.getCategory("Clothing, Shoes and Jewelry"));
-		retailer1.addProduct("Vaccuum Cleaner", 10, 300, "A vaccuum cleaner that clean your house.", CategoryList.getCategory("Appliances"));
+		retailer1.addProduct("Vaccuum Cleaner", 10, 300, "A vaccuum cleaner that cleans your house.", CategoryList.getCategory("Appliances"));
+		retailer1.addProduct("Xbox One", 600, 60, "Microsoft gaming console.", CategoryList.getCategory("Electronics"));
+		retailer1.addProduct("PS5", 600, 80, "Sony gaming console.", CategoryList.getCategory("Electronics"));
+		retailer1.addProduct("Nintendo Switch", 300, 30, "Handheld game console by Nintendo.", CategoryList.getCategory("Electronics"));
 		
 		CategoryList.getCategory("Cell Phones & Accessories").findProduct("Iphone 14").addToCart(customer1.cart, 3);
 		System.out.println(CategoryList.getCategory("Cell Phones & Accessories").findProduct("Iphone 14"));
@@ -40,7 +43,7 @@ public class Test {
 		
 		System.out.println(customer1.cart.checkout);
 		
-		customer1.cart.checkout.makePayment("Visa Debit Card", "My visa card", 6974);
+		customer1.cart.checkout.makePayment("Visa Debit Card", "My visa card", customer1.cart.checkout.finalPrice);
 		
 		System.out.println(customer1.orders);
 		
