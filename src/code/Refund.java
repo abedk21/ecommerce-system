@@ -29,7 +29,7 @@ public class Refund extends Transaction {
 		this.setPaymentInfo(paymentInfo);
 	}
 	
-	public void c() {
+	public void cancel() {
 		this.status = "Cancelled";
 	}
 	
