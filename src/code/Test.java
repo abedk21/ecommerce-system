@@ -176,6 +176,9 @@ public class Test {
 		CategoryList.getCategory("Appliances").findProduct("Toaster").addToCart(customer3.cart);
 		CategoryList.getCategory("Electronics").findProduct("Xbox One").addToCart(customer3.cart);
 		
+		//customer3 proceeds to checkout
+		customer3.cart.proceedToCheckout();
+		
 		//Attempting to make payment with a different amount than the amount required. An exception is thrown.		
 	    try {
 	    	customer1.cart.checkout.makePayment("Visa Debit Card", "My visa card", 0);
@@ -195,6 +198,9 @@ public class Test {
 		//customer2 makes a payment
 		customer2.cart.checkout.makePayment("Paypal", "My paypal account", customer2.cart.checkout.finalPrice);
 		
+		//customer3 makes a payment
+		customer3.cart.checkout.makePayment("Crypto", "Bitcoin", customer3.cart.checkout.finalPrice);
+		
 		
 		System.out.println(customer1.orders);
 		
@@ -213,6 +219,31 @@ public class Test {
 		
 		
 		customer2.orders.get(0).track();
+		
+		
+		System.out.println(customer3.orders);
+		
+		
+		customer3.orders.get(0).track();
+		
+		Delivery.override = true;
+		
+		//customer3 cancels their order
+		customer3.orders.get(0).cancel();
+		
+		//status of the delivery will be cancelled
+		customer3.orders.get(0).track();
+		
+		//since customer3's order has been cancelled, they can request a refund
+		customer3.orders.get(0).purchasedItems.get(0).requestRefund("Haven't received this order, so it was cancelled.");
+		
+		//refund request will appear for retailer1
+		System.out.println(retailer1.refundRequests);
+		
+		//retailer1 pays the refund and the status of the refund is changed
+		retailer1.refundRequests.get(0).pay("Master Card", "My Card", retailer1.refundRequests.get(0).amount);
+		
+		System.out.println(retailer1.refundRequests);
 		
 		//Attempting to add a review with rating that is not between 0 and 5. An exception is thrown.		
 	    try {
@@ -241,6 +272,7 @@ public class Test {
 	        System.out.println(e);
 	      }
 		
+	    //product's average rating will be updated after customers added their reviews
 		System.out.println(CategoryList.getCategory("Cell Phones & Accessories").findProduct("Iphone 14"));
 	}
 

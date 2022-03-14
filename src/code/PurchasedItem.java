@@ -36,8 +36,12 @@ public class PurchasedItem {
 		p.retailer.refundRequests.add(new Refund(this, count, reason));
 	}
 	
+	public void requestRefund(String reason) throws Exception {
+		requestRefund(this.count, reason);
+	}
+	
 	private boolean canRequestRefund() {
-		if((order.delivery.status == "Arrived" && LocalDateTime.now().compareTo(order.delivery.dateOfArrival) <= Refund.daysLimit) || order.delivery.status == "Cancelled") {
+		if((order.delivery.status == "Arrived" && LocalDateTime.now().compareTo(order.delivery.dateOfArrival) <= Refund.daysLimit) || order.delivery.status == "Cancelled" || Refund.override) {
 			return true;
 		}
 		return false;

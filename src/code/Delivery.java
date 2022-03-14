@@ -12,6 +12,7 @@ public class Delivery {
 	public String liveLocation;
 	public String status;
 	public int maxDays = 15;
+	public static boolean override;
 
 	public Delivery(Address address) {
 		super();
