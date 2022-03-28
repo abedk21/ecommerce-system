@@ -41,7 +41,7 @@ public class PurchasedItem {
 	}
 	
 	private boolean canRequestRefund() {
-		if((order.delivery.status == "Arrived" && LocalDateTime.now().compareTo(order.delivery.dateOfArrival) <= Refund.daysLimit) || order.delivery.status == "Cancelled" || Refund.override) {
+		if((order.delivery.state == Delivery.states.ARRIVED && LocalDateTime.now().compareTo(order.delivery.dateOfArrival) <= Refund.daysLimit) || order.delivery.state == Delivery.states.CANCELLED || Refund.override) {
 			return true;
 		}
 		return false;

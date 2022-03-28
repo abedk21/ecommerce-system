@@ -9,15 +9,25 @@ public class Cart {
 	public Customer customer;
 	public float totalPrice;
 	public int totalCount;
+	public states state;
+	public states prevState;
+	
+	enum states {
+		EMPTY,
+		NOTEMPTY,
+		FULL,
+		CHECKOUT
+	}
 
 	public Cart(Customer customer) {
 		super();
 		this.cartItems = new ArrayList<CartItem>();
 		this.totalPrice = 0;
 		this.customer = customer;
+		this.state = states.EMPTY;
 	}
 	
-	public void add(Product p) {
+	public void addToCart(Product p) {
 		for(int i = 0; i < cartItems.size(); i++) {
 			if(cartItems.get(i).p == p) {
 				cartItems.get(i).count++;
@@ -29,6 +39,13 @@ public class Cart {
 		cartItems.add(new CartItem(p, this));
 		totalCount++;
 		calculateTotalPrice(); //update total price
+		if(state == states.EMPTY) {
+			state = states.NOTEMPTY;
+		}
+		
+		if(totalCount == 50) {
+			state = states.FULL;
+		}
 	}
 	
 //	14. When a cart item is removed from cart, its price will be subtracted from the cart’s total price.
@@ -51,6 +68,10 @@ public class Cart {
 				return;
 			}
 		}
+		
+		if(state == states.FULL) {
+			state = states.NOTEMPTY;
+		}
 	}
 	
 	private void calculateTotalPrice() {
@@ -72,12 +93,15 @@ public class Cart {
 			throw new Exception("Can't proceed to checkout. The cart is empty");
 		}
 		checkout = new Checkout(this, totalPrice);
+		prevState = state;
+		state = states.CHECKOUT;
 	}
 	
 	public void empty() {
 		cartItems.clear();
 		this.totalPrice = 0;
 		this.totalCount = 0;
+		this.state = states.EMPTY;
 	}
 	
 	public String toString() {

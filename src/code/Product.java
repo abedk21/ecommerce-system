@@ -14,6 +14,13 @@ public class Product {
 	public Retailer retailer;
 	public float averageRating;
 	public ArrayList<Review> reviews = new ArrayList<Review>();
+	public states state;
+	
+	enum states {
+		IDLE,
+		INSTOCK,
+		OUTOFSTOCK
+	}
 
 	public Product(String name, float price, int count, String description, Category category, Retailer retailer) {
 		super();
@@ -27,6 +34,23 @@ public class Product {
 		this.retailer = retailer;
 		category.addProduct(this);
 		this.averageRating = 0;
+		this.state = states.IDLE;
+	}
+	
+	public void display() {
+		this.state = states.INSTOCK;
+	}
+	
+	public void addCount(int n) {
+		count += n;
+		state = states.INSTOCK;
+	}
+	
+	public void subCount(int n) {
+		count -= n;
+		if(count == 0) {
+			state = states.OUTOFSTOCK;
+		}	
 	}
 	
 	public void edit(String name, float price, int count, String description, Category category) {
@@ -81,7 +105,7 @@ public class Product {
 		}
 		
 		for(int i = 0; i < count; i++) {
-			cart.add(this);
+			cart.addToCart(this);
 		}
 	}
 	
@@ -106,7 +130,7 @@ public class Product {
 		if(cart.totalCount == 50) {
 			throw new Exception("You can't have more than 50 items in your cart.");
 		}
-		cart.add(this);
+		cart.addToCart(this);
 	}
 	
 //	9. After the customer orders a product, they can add a review. The average rating of the product will be updated.

@@ -38,8 +38,8 @@ public class Order {
 //	inv: self.status = “Cancelled” implies ( (Day(today) - Day(dateOfArrival)) > 0 AND self.status <> “Arrived”)
 	
 	public void cancel() throws Exception {
-		if((LocalDateTime.now().compareTo(this.delivery.dateOfArrival) > 0 && this.delivery.status != "Arrived") || Delivery.override) {
-			delivery.status = "Cancelled";
+		if((LocalDateTime.now().compareTo(this.delivery.dateOfArrival) > 0 && this.delivery.state != Delivery.states.ARRIVED) || Delivery.override) {
+			delivery.cancel();
 			System.out.println("Your order has been cancelled.");
 		}
 		else {

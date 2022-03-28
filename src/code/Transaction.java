@@ -23,19 +23,6 @@ public abstract class Transaction {
 		this.amount = amount;
 	}
 
-	public boolean verify(float finalPrice) {
-		if(finalPrice != amount) {
-			this.status = "Failed";
-			return false;
-		}
-		
-		if(status != "Approved") {
-			return false;
-		}
-		
-		return true;
-	}
-
 	public String getPaymentInfo() {
 		return paymentInfo;
 	}

@@ -44,16 +44,18 @@ public class Checkout {
 	public void makePayment(String paymentMethod, String paymentInfo, float amount) {
 		Payment payment = new Payment(paymentMethod, paymentInfo, amount);
 		
+		payment.verify(finalPrice);
+		
 //		7. An item can only be purchased if the payment is approved
 //		Context Payment
 //		Inv: self.purchaseditem -> isnotEmpty() implies self.status = “Approved”
 		
-		// The verify() method will check if the payment has been approved.
-		if(payment.verify(finalPrice)) {
+		// The check() method will check if the payment has been successful.
+		if(payment.check()) {
 			Order order = new Order(payment, cart.customer.address);
 			ArrayList<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();
 			for(int i = 0; i < cart.cartItems.size(); i++) {
-				cart.cartItems.get(i).p.count -= cart.cartItems.get(i).count;
+				cart.cartItems.get(i).p.subCount(cart.cartItems.get(i).count);
 				purchasedItems.add(new PurchasedItem(cart.cartItems.get(i), order));
 			}
 			order.purchasedItems = purchasedItems;
@@ -65,6 +67,7 @@ public class Checkout {
 	}
 
 	public void cancelCheckout() {
+		cart.state = cart.prevState;
 		cart.checkout = null;
 	}
 	
