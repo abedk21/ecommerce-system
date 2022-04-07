@@ -9,12 +9,11 @@ public abstract class Transaction {
 	public static String tempStatus;
 	public float amount;
 
-	public Transaction(String paymentMethod, String paymentInfo, float amount) {
+	public Transaction(String paymentMethod, String paymentInfo) {
 		super();
 		Payment.transactionId++;
 		this.paymentMethod = paymentMethod;
 		this.setPaymentInfo(paymentInfo);
-		this.amount = amount;
 		this.status = tempStatus;
 	}
 	

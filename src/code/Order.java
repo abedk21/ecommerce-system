@@ -38,7 +38,7 @@ public class Order {
 //	inv: self.status = “Cancelled” implies ( (Day(today) - Day(dateOfArrival)) > 0 AND self.status <> “Arrived”)
 	
 	public void cancel() throws Exception {
-		if((LocalDateTime.now().compareTo(this.delivery.dateOfArrival) > 0 && this.delivery.state != Delivery.states.ARRIVED) || Delivery.override) {
+		if((LocalDateTime.now().compareTo(delivery.expectedDateOfArrival) > 0 && delivery.state != Delivery.states.ARRIVED) || Delivery.override) {
 			delivery.cancel();
 			System.out.println("Your order has been cancelled.");
 		}
@@ -56,7 +56,7 @@ public class Order {
 			}
 			order += purchasedItems.get(i);
 	      }
-		order += "]" +", Total Amount Paid: $" + payment.amount + ", Date of Purchase: " + dateOfPurchase +"]";
+		order += "]" +", Total Price: $" + payment.cart.totalPrice + ", Added Tax: " + Cart.taxRate + "%, Delivery Charge: $" + payment.cart.deliveryCharge + ", Final Price: $" + payment.finalPrice  + ", Date of Purchase: " + dateOfPurchase +"]";
 		return order;
 	}
 	

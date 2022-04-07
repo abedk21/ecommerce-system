@@ -16,6 +16,22 @@ public class Customer extends User {
 		this.address = address;
 	}
 	
+	public void addAddress(Address address){
+		this.address = address;
+	}
+	
+	public void editAddress(String street, String postalCode, String city, String country){
+		address.street = street;
+		address.postalCode = postalCode;
+		address.city = city;
+		address.country = country;
+	}
+	
+	public void addPaymentDetails(String paymentMethod, String paymentInfo) {
+		this.paymentMethod = paymentMethod;
+		this.paymentInfo = paymentInfo;
+	}
+	
 	public String toString() {
 		return String.format("Customer: [First Name: %s, Last Name: %s, Email: %s, Phone Number: %s, Username: %s, %s]", firstName, lastName, email, phoneNumber, username, address);
 	}

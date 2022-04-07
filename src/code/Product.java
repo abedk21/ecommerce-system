@@ -19,7 +19,8 @@ public class Product {
 	enum states {
 		IDLE,
 		INSTOCK,
-		OUTOFSTOCK
+		OUTOFSTOCK,
+		DISCONTINUED
 	}
 
 	public Product(String name, float price, int count, String description, Category category, Retailer retailer) {
@@ -44,6 +45,10 @@ public class Product {
 	public void addCount(int n) {
 		count += n;
 		state = states.INSTOCK;
+	}
+	
+	public void discontinue() {
+		state = states.DISCONTINUED;
 	}
 	
 	public void subCount(int n) {

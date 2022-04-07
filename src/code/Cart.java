@@ -5,9 +5,12 @@ import java.util.*;
 public class Cart {
 	
 	public ArrayList<CartItem> cartItems;
-	public Checkout checkout;
 	public Customer customer;
+	public Payment payment;
 	public float totalPrice;
+	public static float taxRate = 15;
+	public float deliveryCharge;
+	public float finalPrice;
 	public int totalCount;
 	public states state;
 	public states prevState;
@@ -16,7 +19,8 @@ public class Cart {
 		EMPTY,
 		NOTEMPTY,
 		FULL,
-		CHECKOUT
+		CHECKOUT,
+		PAYING
 	}
 
 	public Cart(Customer customer) {
@@ -92,9 +96,20 @@ public class Cart {
 		if(cartItems.size() == 0) {
 			throw new Exception("Can't proceed to checkout. The cart is empty");
 		}
-		checkout = new Checkout(this, totalPrice);
 		prevState = state;
 		state = states.CHECKOUT;
+	}
+	
+	public void cancelCheckout() {
+		state = prevState;
+	}
+	
+	public void makePayment(String paymentMethod, String paymentInfo) {
+		
+		float finalPrice = totalPrice* (taxRate/100 + 1) + calculateDeliveryCharge();
+		
+		payment = new Payment(paymentMethod, paymentInfo, finalPrice, this);
+		
 	}
 	
 	public void empty() {
@@ -102,6 +117,19 @@ public class Cart {
 		this.totalPrice = 0;
 		this.totalCount = 0;
 		this.state = states.EMPTY;
+	}
+	
+//	15. If the total price in the cart is less than $50, then there is a $5 delivery charge.
+//	Context Cart
+//	inv: self.deliveryCharge = if(totalPrice < 50) then 5
+//	else 0
+//	endif
+
+	private float calculateDeliveryCharge() {
+		if(totalPrice <= 50) {
+			return 5;
+		}
+		return 0;
 	}
 	
 	public String toString() {

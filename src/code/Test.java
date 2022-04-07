@@ -130,19 +130,19 @@ public class Test {
 		//customer2 proceeds to checkout
 		customer2.cart.proceedToCheckout();
 		
-		//customer3 proceeds to checkout. There's a $5 delivery charge because the total price is less than $50.
+		//customer3 proceeds to checkout.
 		customer3.cart.proceedToCheckout();
 		
-		System.out.println(customer1.cart.checkout);
+		System.out.println(customer1.cart.state);
 		
-		System.out.println(customer2.cart.checkout);
+		System.out.println(customer2.cart.state);
 		
-		System.out.println(customer3.cart.checkout);
+		System.out.println(customer3.cart.state);
 		
-		customer3.cart.checkout.cancelCheckout();
+		customer3.cart.cancelCheckout();
 		
 		//Checkout will be cancelled
-		System.out.println(customer3.cart.checkout);
+		System.out.println(customer3.cart.state);
 		
 		//Emptying cart of customer3
 		customer3.cart.empty();
@@ -179,28 +179,44 @@ public class Test {
 		//customer3 proceeds to checkout
 		customer3.cart.proceedToCheckout();
 		
-		//Attempting to make payment with a different amount than the amount required. An exception is thrown.		
-	    try {
-	    	customer1.cart.checkout.makePayment("Visa Debit Card", "My visa card", 0);
-	      } catch (Exception e) {
-	        System.out.println(e);
-	      }
 		
-		
-		Payment.tempStatus = "Approved";
+		Payment.bankApproved = true;
 		
 		//customer1 makes a payment
-		customer1.cart.checkout.makePayment("Visa Debit Card", "My visa card", customer1.cart.checkout.finalPrice);
+		customer1.cart.makePayment("Visa Debit Card", "My visa card");
+		
+		customer1.cart.payment.pay(customer1.cart.payment.finalPrice);
+		
+		customer1.cart.payment.verify();
+		
+		customer1.cart.payment.verifyBank();
+		
+		customer1.cart.payment.completePurchase();
 		
 		//Cart should be empty
 		System.out.println(customer1.cart);
 		
 		//customer2 makes a payment
-		customer2.cart.checkout.makePayment("Paypal", "My paypal account", customer2.cart.checkout.finalPrice);
+		customer2.cart.makePayment("Paypal", "My paypal account");
+		
+		customer2.cart.payment.pay(customer2.cart.payment.finalPrice);
+		
+		customer2.cart.payment.verify();
+		
+		customer2.cart.payment.verifyBank();
+		
+		customer2.cart.payment.completePurchase();
 		
 		//customer3 makes a payment
-		customer3.cart.checkout.makePayment("Crypto", "Bitcoin", customer3.cart.checkout.finalPrice);
+		customer3.cart.makePayment("Crypto", "Bitcoin");
 		
+		customer3.cart.payment.pay(customer3.cart.payment.finalPrice);
+		
+		customer3.cart.payment.verify();
+		
+		customer3.cart.payment.verifyBank();
+		
+		customer3.cart.payment.completePurchase();
 		
 		System.out.println(customer1.orders);
 		

@@ -27,6 +27,7 @@ public class Refund extends Transaction {
 		this.status = "Paid";
 		this.paymentMethod = paymentMethod;
 		this.setPaymentInfo(paymentInfo);
+		this.amount = amount;
 	}
 	
 	public void cancel() {
