@@ -187,7 +187,7 @@ public class Test {
 		
 		customer1.cart.payment.pay(customer1.cart.payment.finalPrice);
 		
-		customer1.cart.payment.verify();
+		customer1.cart.payment.verifyAmount();
 		
 		customer1.cart.payment.verifyBank();
 		
@@ -201,7 +201,7 @@ public class Test {
 		
 		customer2.cart.payment.pay(customer2.cart.payment.finalPrice);
 		
-		customer2.cart.payment.verify();
+		customer2.cart.payment.verifyAmount();
 		
 		customer2.cart.payment.verifyBank();
 		
@@ -212,7 +212,7 @@ public class Test {
 		
 		customer3.cart.payment.pay(customer3.cart.payment.finalPrice);
 		
-		customer3.cart.payment.verify();
+		customer3.cart.payment.verifyAmount();
 		
 		customer3.cart.payment.verifyBank();
 		

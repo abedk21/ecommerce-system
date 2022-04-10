@@ -16,6 +16,7 @@ public class Product {
 	public ArrayList<Review> reviews = new ArrayList<Review>();
 	public states state;
 	
+	//This is where the product class state diagram is implemented. The following are the states.
 	enum states {
 		IDLE,
 		INSTOCK,
@@ -37,6 +38,8 @@ public class Product {
 		this.averageRating = 0;
 		this.state = states.IDLE;
 	}
+	
+	//The methods display(), addCount(), subCount, discontinued() are the events of the state diagram that will cause the transitions.
 	
 	public void display() {
 		this.state = states.INSTOCK;

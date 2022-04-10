@@ -15,6 +15,7 @@ public class Delivery {
 	public static boolean override;
 	public states state;
 	
+	//This is where the delivery class state diagram is implemented. The following are the states.
 	enum states {
 		READY,
 		SHIPPED,
@@ -41,6 +42,8 @@ public class Delivery {
 	public void updateLocation(String liveLocation) {
 		this.liveLocation = liveLocation;
 	}
+	
+	//The methods ship(), inTransit(), delay(), cancel(), arrived()  are the events of the state diagram that will cause the transitions.
 	
 	public void ship() {
 		state = states.SHIPPED;

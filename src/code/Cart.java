@@ -8,13 +8,14 @@ public class Cart {
 	public Customer customer;
 	public Payment payment;
 	public float totalPrice;
-	public static float taxRate = 15;
+	public static float taxRate = 5;
 	public float deliveryCharge;
 	public float finalPrice;
 	public int totalCount;
 	public states state;
 	public states prevState;
 	
+	//This is where the cart class state diagram is implemented. The following are the states.
 	enum states {
 		EMPTY,
 		NOTEMPTY,
@@ -30,6 +31,8 @@ public class Cart {
 		this.customer = customer;
 		this.state = states.EMPTY;
 	}
+	
+	//The methods addToCart(), removeFromCart(), empty(), proceedToCheckout(), cancelCheckout(), makePayment() are the events of the state diagram that will cause the transitions.
 	
 	public void addToCart(Product p) {
 		for(int i = 0; i < cartItems.size(); i++) {
@@ -89,9 +92,8 @@ public class Cart {
 	public void proceedToCheckout() throws Exception {
 		
 //		6. The customer won’t be able to proceed to checkout if the cart is empty.
-//		Context cart::proceedToCheckout(c :Checkout)
-//		Pre: self.checkout -> excludes(c) AND self.CartItem -> isnotEmpty()
-//		Post: self.checkout -> includes(c)
+//		Context cart
+//		Inv: allInstances() -> forAll(c: Cart | c.state = "Checkout" implies c.CartItem -> isnotEmpty())
 		
 		if(cartItems.size() == 0) {
 			throw new Exception("Can't proceed to checkout. The cart is empty");

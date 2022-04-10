@@ -6,10 +6,11 @@ public class Payment extends Transaction {
 	
 	public Cart cart;
 	public float finalPrice;
-	public float processedAmount;
+	public float processedAmount; //amount to be verified
 	public states state;
 	public static boolean bankApproved;
 	
+	//This is where the payment class state diagram is implemented. The following are the states.
 	enum states {
 		IDLE,
 		PROCESSING,
@@ -26,12 +27,14 @@ public class Payment extends Transaction {
 		this.cart = cart;
 	}
 	
+	//The methods pay(), verifyAmount(), verifyBank(), tryAgain(), cancel() are the events of the state diagram that will cause the transitions.
+	
 	public void pay(float amount) throws Exception{
 		state = states.PROCESSING;
 		processedAmount = amount;
 	}
 
-	public void verify() {
+	public void verifyAmount() {
 		if(processedAmount == finalPrice) {
 			state = states.VERIFIED;
 			amount = processedAmount;
@@ -53,6 +56,22 @@ public class Payment extends Transaction {
 		else {
 			state = states.FAILED;
 		}
+	}
+	
+	public void tryAgain() throws Exception{
+		if(state != states.FAILED) {
+			throw new Exception("Can't try again at this time.");
+		}
+		
+		state = states.PROCESSING;
+	}
+	
+	public void cancel() throws Exception{
+		if(state != states.FAILED) {
+			throw new Exception("Can't cancel payment at this time.");
+		}
+		
+		state = states.CANCELLED;
 	}
 
 //10. After the customer makes a payment and if payment is approved, their cart will be empty and the count of the purchased items will be subtracted from the count of the product.
@@ -81,22 +100,6 @@ public class Payment extends Transaction {
 		} else {
 			System.out.println("Can't complete purchase because payment wasn't successful.");
 		}
-	}
-	
-	public void tryAgain() throws Exception{
-		if(state != states.FAILED) {
-			throw new Exception("Can't try again at this time.");
-		}
-		
-		state = states.PROCESSING;
-	}
-	
-	public void cancel() throws Exception{
-		if(state != states.FAILED) {
-			throw new Exception("Can't cancel payment at this time.");
-		}
-		
-		state = states.CANCELLED;
 	}
 	
 }
