@@ -74,19 +74,15 @@ public class Payment extends Transaction {
 		state = states.CANCELLED;
 	}
 
-//10. After the customer makes a payment and if payment is approved, their cart will be empty and the count of the purchased items will be subtracted from the count of the product.
-//Context Checkout::makePayment(p :Payment)
-//pre: self.Payment -> excludes(p) AND
-//	self.Cart.CartItems -> isNotEmpty()
-//post: 
-//self.Payment -> includes(p) AND
-//p.status = “Approved” implies self.Cart.CartItems -> isEmpty() AND self.Cart.Product -> forAll(c :CartItem, p :Product | c.id = p.id implies p.count = p.count@pre - c.count)
-
+//	10. After the customer makes a payment and if payment is successful, their cart will be empty, and the count of the purchased items will be subtracted from the count of the product.  
+//	Context Payment 
+//	Inv: allInstances() -> forAll(p: Payment | p.state = “Success” implies self.CartItems -> isEmpty()) AND self.Cart.Product -> forAll(c :CartItem, p :Product | c.id = p.id implies p.count = p.count@pre - c.count)  
+	
 	public void completePurchase() {
 		if(state == states.SUCCESS) {
-//			7. An item can only be purchased if the payment is approved
-//			Context Payment
-//			Inv: self.purchaseditem -> isnotEmpty() implies self.state = “Success”
+//			7. An item can only be purchased if the payment was successful 
+//			Context Payment  
+//			Inv: self.purchaseditem -> isnotEmpty() implies self.state = “Success”  
 			
 			Order order = new Order(this, cart.customer.address);
 			ArrayList<PurchasedItem> purchasedItems = new ArrayList<PurchasedItem>();

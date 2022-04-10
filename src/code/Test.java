@@ -133,15 +133,12 @@ public class Test {
 		//customer3 proceeds to checkout.
 		customer3.cart.proceedToCheckout();
 		
+		//the state of the cart will be "Checkout"
 		System.out.println(customer1.cart.state);
-		
-		System.out.println(customer2.cart.state);
-		
-		System.out.println(customer3.cart.state);
 		
 		customer3.cart.cancelCheckout();
 		
-		//Checkout will be cancelled
+		//Checkout will be cancelled and the state of the cart will return to the previous state "Not Empty"
 		System.out.println(customer3.cart.state);
 		
 		//Emptying cart of customer3
@@ -183,15 +180,28 @@ public class Test {
 		Payment.bankApproved = true;
 		
 		//customer1 makes a payment
-		customer1.cart.makePayment("Visa Debit Card", "My visa card");
+		customer1.cart.makePayment("Visa Debit Card", "My visa card"); //a payment is created
 		
-		customer1.cart.payment.pay(customer1.cart.payment.finalPrice);
+		//the state of the payment will be "Idle"
+		System.out.println(customer1.cart.payment.state);
 		
-		customer1.cart.payment.verifyAmount();
+		customer1.cart.payment.pay(customer1.cart.payment.finalPrice); //the customer then pays with the required amount
 		
-		customer1.cart.payment.verifyBank();
+		//the state of the payment will be "Processing"
+		System.out.println(customer1.cart.payment.state);
 		
-		customer1.cart.payment.completePurchase();
+		
+		customer1.cart.payment.verifyAmount(); //the amount is verified
+		
+		//the state of the payment will be "Verified"
+		System.out.println(customer1.cart.payment.state);
+		
+		customer1.cart.payment.verifyBank(); //the payment is verified with the bank
+		
+		//the state of the payment will be "Success"
+		System.out.println(customer1.cart.payment.state);
+		
+		customer1.cart.payment.completePurchase(); //the payment is checked if it was successful and the purchase is complete
 		
 		//Cart should be empty
 		System.out.println(customer1.cart);

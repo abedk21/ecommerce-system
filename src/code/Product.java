@@ -145,7 +145,7 @@ public class Product {
 //	Context Product::addReview(r :Review)
 //	pre: self.User -> forAll(u :user | u.oclIsTypeOf(Customer)) AND
 //		self.Review -> excludes(r) AND
-//		allInstances() -> includesAll(self.Customer.Order.PurchasedItem.Payment.Checkout.Cart.Product)
+//		allInstances() -> includesAll(self.Customer.Order.PurchasedItem.Payment.Cart.Product)
 //	post: self.Review -> includes(r) AND
 //		averageRating = (self.Review-> select(r.id = p.id) -> collect(rating) -> sum()) / self.Review-> select(r.id = p.id) -> size()
 
@@ -155,7 +155,7 @@ public class Product {
 		
 //		4.For the customer to give review to the product, he/she should be a verified purchaser.
 //		Context Customer
-//		Inv: self.product -> includesAll(self.Order.PurchasedItem.Payment.Checkout.Cart.Product)
+//		Inv: self.product -> includesAll(self.Order.PurchasedItem.Payment.Cart.Product)
 		
 		boolean found = false;
 		for(int i = 0; i < c.orders.size(); i++) {

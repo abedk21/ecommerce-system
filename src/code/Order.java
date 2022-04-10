@@ -35,7 +35,7 @@ public class Order {
 	
 //	11. The delivery should be cancelled when it doesn’t arrive on time.
 //	Context Delivery
-//	inv: self.status = “Cancelled” implies ( (Day(today) - Day(dateOfArrival)) > 0 AND self.status <> “Arrived”)
+//	inv: self.state = “Cancelled” implies ( (Day(today) - Day(dateOfArrival)) > 0 AND self.state <> “Arrived”)
 	
 	public void cancel() throws Exception {
 		if((LocalDateTime.now().compareTo(delivery.expectedDateOfArrival) > 0 && delivery.state != Delivery.states.ARRIVED) || Delivery.override) {
